@@ -9,6 +9,11 @@ public class Developer {
     public String firstName;
     public String secondName;
 
+    public Developer(int id) {
+        this.id = id;
+        this.isFree = true;
+    }
+
     public Developer(int id, String firstName, String secondName) {
         this.id = id;
         this.isFree = true;
@@ -16,7 +21,7 @@ public class Developer {
         this.firstName = firstName;
     }
 
-    boolean addTask(Task task){
+    public boolean addTask(Task task){
         if(this.isFree && this.currentTask == null){
             this.currentTask = task;
             this.isFree = false;
@@ -25,7 +30,7 @@ public class Developer {
         return false;
     }
 
-    Task makeTask(){
+    public Task makeTask(){
         if(this.currentTask != null && !this.isFree){
             this.currentTask.isDeveloped = true;
             this.isFree = true;
@@ -33,7 +38,7 @@ public class Developer {
         return null;
     }
 
-    void release(){
+    public void release(){
         this.currentTask = null;
         this.isFree = true;
     }
