@@ -38,4 +38,23 @@ public class TaskService {
         return list;
     }
 
+    public Task getTaskById(int id){
+        for (Task a: arrayList) {
+            if(a.id == id) {
+                return a;
+            }
+        }
+        throw new IllegalStateException("Task is not found");
+    }
+
+    public void addCommentToTask(int id, String comment){
+        Task t = getTaskById(id);
+        int counter = 0;
+        for (Integer i: t.comments.keySet()){
+            if (i > counter){
+                counter = i;
+            }
+        }
+        t.comments.put(id, comment);
+    }
 }
