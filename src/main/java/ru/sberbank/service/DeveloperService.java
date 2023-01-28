@@ -16,7 +16,6 @@ public class DeveloperService {
             throw new IllegalStateException("Developer is not created!");
         }
         list.add(new Developer(id, firstName, secondName));
-//        return true;
     }
 
     public Developer getDeveloper(String firstName, String secondName) {

@@ -17,7 +17,7 @@ public class TaskService {
             list.add(new Task(id, summary));
             return true;
         }
-        return false;
+        throw new IllegalStateException("Task was not created!");
     }
 
     public Task getTask(String summary) {
@@ -26,7 +26,7 @@ public class TaskService {
                 return n;
             }
         }
-        return null;
+        throw new IllegalStateException("Task was not created!");
     }
 
     public ArrayList<Task> getTasksForDeveloping() {
@@ -36,7 +36,11 @@ public class TaskService {
                 list.add(n);
             }
         }
-        return list;
+        if(list.size() != 0) {
+            return list;
+        } else {
+            throw new IllegalStateException("Task was not found!");
+        }
     }
 
     public Task getTaskById(int id){
@@ -51,6 +55,9 @@ public class TaskService {
     public void addCommentToTask(int id, String comment){
         Task t = getTaskById(id);
 
-        t.comment.put(Collections.max(t.comment.keySet()) + 1, comment);
+        if(comment.isEmpty())
+            throw new IllegalStateException("Comment to task was not added!");
+        else
+            t.comment.put(Collections.max(t.comment.keySet()) + 1, comment);
     }
 }

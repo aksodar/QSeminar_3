@@ -15,7 +15,7 @@ public class TesterService {
             list.add(new Tester(id, firstName, secondName));
             return true;
         }
-        return false;
+        throw new IllegalStateException("Tester is not created!");
     }
 
     public Tester getTester(String firstName, String secondName) {
@@ -23,7 +23,7 @@ public class TesterService {
             if(firstName.equalsIgnoreCase(user.firstName) && secondName.equalsIgnoreCase(user.secondName))
                 return user;
 
-        return null;
+        throw new IllegalStateException("Tester is not found!");
     }
 
     public ArrayList getFreeTesters() {
@@ -33,6 +33,10 @@ public class TesterService {
             if(item.isFree)
                 tmp.add(item);
 
-        return tmp;
+        if(tmp.size() != 0) {
+            return tmp;
+        } else {
+            throw new IllegalStateException("Free Tester is not found!");
+        }
     }
 }
