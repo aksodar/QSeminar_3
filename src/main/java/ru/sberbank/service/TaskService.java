@@ -11,12 +11,11 @@ public class TaskService {
         this.arrayList = new ArrayList<>();
     }
 
-    public boolean createTask(int id, String summary) {
-        if(summary != null && !summary.isEmpty()){
-            arrayList.add(new Task(id, summary));
-            return true;
+    public void createTask(int id, String summary) {
+        if(summary == null && summary.isEmpty()){
+            throw new IllegalStateException("Task is not create");
         }
-        return false;
+        arrayList.add(new Task(id, summary));
     }
 
     public Task getTask(String summary) {
@@ -25,7 +24,7 @@ public class TaskService {
                 return n;
             }
         }
-        return null;
+        throw new IllegalStateException("Task is not found");
     }
 
     public ArrayList<Task> getTasksForDeveloping() {
@@ -35,7 +34,33 @@ public class TaskService {
                 list.add(n);
             }
         }
+        if(list.isEmpty()) {
+            throw new IllegalStateException("All task developed");
+        }
         return list;
+    }
+
+    public Task getTaskById(int id){
+        for (Task a:arrayList) {
+            if(id == a.id) {
+                return a;
+            }
+        }
+        throw new IllegalStateException("Task with id not found");
+    }
+
+    public void addCommentToTask(int id, String comment){
+        Task task = getTaskById(id);
+        int counter = 0;
+        for (Integer i: task.comments.keySet()) {
+            if(i > counter){
+                counter = i;
+            }
+        }
+        if(counter == 0) {
+            throw new IllegalStateException("No task");
+        }
+        task.comments.put(++counter, comment);
     }
 
 }
