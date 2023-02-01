@@ -40,8 +40,12 @@ public class Developer {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Developer developer = (Developer) o;
         return id == developer.id && isFree == developer.isFree && Objects.equals(currentTask, developer.currentTask);
     }
