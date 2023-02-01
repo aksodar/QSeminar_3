@@ -11,12 +11,11 @@ public class DeveloperService {
         this.list = new ArrayList<>();
     }
 
-    public boolean createDeveloper(int id, String firstName, String secondName) {
-        if((firstName != null && !firstName.isEmpty()) && (secondName != null  && !secondName.isEmpty())) {
-            list.add(new Developer(id, firstName, secondName));
-            return true;
+    public void createDeveloper(int id, String firstName, String secondName) {
+        if((firstName == null || firstName.isEmpty()) || (secondName == null  || secondName.isEmpty())) {
+            throw new IllegalStateException("Incorrect params, Developer not created");
         }
-        return false;
+        list.add(new Developer(id, firstName, secondName));
     }
 
     public Developer getDeveloper(String firstName, String secondName) {
@@ -25,17 +24,20 @@ public class DeveloperService {
                 return t;
             }
         }
-        return null;
+        throw new IllegalStateException("Developer not found");
     }
 
     public ArrayList<Developer> getFreeDevelopers() {
-        ArrayList<Developer> freeTester = new ArrayList<>();
+        ArrayList<Developer> freeDevelopers = new ArrayList<>();
         for (Developer n: list) {
             if(n.isFree) {
-                freeTester.add(n);
+                freeDevelopers.add(n);
             }
         }
-        return freeTester;
+        if (freeDevelopers.isEmpty()) {
+            throw new IllegalStateException("No free Developers");
+        }
+        return freeDevelopers;
     }
 
 }
