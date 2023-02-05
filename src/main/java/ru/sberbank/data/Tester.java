@@ -71,7 +71,7 @@ public class Tester {
     }
 
     public boolean addTask(Task test) {
-        if (this.isFree == true && this.currentTask == null && test.isDeveloped()) {
+        if (this.isFree && this.currentTask == null && test.isDeveloped()) {
             this.currentTask = test;
             this.isFree = false;
             return true;
