@@ -3,11 +3,11 @@ package ru.sberbank.data;
 import java.util.Objects;
 
 public class Developer {
-    Task currentTask;
-    public int id;
-    public boolean isFree;
-    public String firstName;
-    public String secondName;
+    private int id;
+    private String firstName;
+    private String secondName;
+    private boolean isFree;
+    private Task currentTask;
 
     public Developer(int id, String firstName, String secondName) {
         this.id = id;
@@ -16,7 +16,47 @@ public class Developer {
         this.firstName = firstName;
     }
 
-    boolean addTask(Task task){
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(final String secondName) {
+        this.secondName = secondName;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(final boolean free) {
+        isFree = free;
+    }
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+
+    public void setCurrentTask(final Task currentTask) {
+        this.currentTask = currentTask;
+    }
+
+    public boolean addTask(Task task){
         if(this.isFree && this.currentTask == null){
             this.currentTask = task;
             this.isFree = false;
@@ -25,15 +65,15 @@ public class Developer {
         return false;
     }
 
-    Task makeTask(){
+    public Task makeTask(){
         if(this.currentTask != null && !this.isFree){
-            this.currentTask.isDeveloped = true;
+            this.currentTask.setDeveloped(true);
             this.isFree = true;
         }
         return null;
     }
 
-    void release(){
+    public void release(){
         this.currentTask = null;
         this.isFree = true;
     }
