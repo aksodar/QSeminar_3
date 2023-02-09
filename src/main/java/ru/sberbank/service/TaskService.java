@@ -40,4 +40,13 @@ public class TaskService {
                        .findFirst()
                        .orElseThrow(() -> new IllegalStateException("Task is with id = " + id + " not found"));
     }
+
+    public Task addSummaryToTask(int id, String summary) {
+        if (summary == null || summary.isEmpty()) {
+            throw new IllegalStateException("Summary don't set");
+        }
+        Task task = this.getTaskById(id);
+        task.setSummary(summary);
+        return task;
+    }
 }
